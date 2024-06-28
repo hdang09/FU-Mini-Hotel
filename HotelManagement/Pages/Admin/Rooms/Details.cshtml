@@ -1,0 +1,43 @@
+﻿@page
+@model HotelManagement.Pages.Admin.Rooms.DetailsModel
+
+@{
+    ViewData["Title"] = "Details Room";
+}
+
+<form class="max-w-sm mx-auto" method="post">
+    <h1 class="text-3xl font-bold col-span-3 dark:text-white mb-8">Details Room</h1>
+    <div asp-validation-summary="ModelOnly" class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"></div>
+
+    <div class="mb-5">
+        <label asp-for="RoomInformation.RoomNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input asp-for="RoomInformation.RoomNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="RoomInformation.RoomNumber" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="RoomInformation.RoomDetailDescription" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <textarea asp-for="RoomInformation.RoomDetailDescription" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+        <span asp-validation-for="RoomInformation.RoomDetailDescription" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="RoomInformation.RoomMaxCapacity" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input asp-for="RoomInformation.RoomMaxCapacity" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="RoomInformation.RoomMaxCapacity" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="RoomInformation.RoomTypeId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input asp-for="RoomInformation.RoomTypeId" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="RoomInformation.RoomTypeId" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="RoomInformation.RoomStatus" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input asp-for="RoomInformation.RoomStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="RoomInformation.RoomStatus" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="RoomInformation.RoomPricePerDay" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input asp-for="RoomInformation.RoomPricePerDay" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="RoomInformation.RoomPricePerDay" class="text-danger"></span>
+    </div>
+</form>
+

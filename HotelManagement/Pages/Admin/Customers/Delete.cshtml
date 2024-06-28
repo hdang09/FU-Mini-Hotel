@@ -1,0 +1,47 @@
+﻿@page
+@model HotelManagement.Pages.Customers.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+
+<form class="max-w-sm mx-auto" method="post">
+    <h1 class="text-3xl font-bold col-span-3 dark:text-white mb-8">Delete Customer</h1>
+    <div asp-validation-summary="ModelOnly" class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"></div>
+
+    <div class="mb-5">
+        <label asp-for="Customer.CustomerFullName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input disabled asp-for="Customer.CustomerFullName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="Customer.CustomerFullName" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="Customer.Telephone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input disabled asp-for="Customer.Telephone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="Customer.Telephone" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="Customer.EmailAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input disabled asp-for="Customer.EmailAddress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="Customer.EmailAddress" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="Customer.CustomerBirthday" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input disabled asp-for="Customer.CustomerBirthday" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="Customer.CustomerBirthday" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="Customer.CustomerStatus" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input disabled asp-for="Customer.CustomerStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="Customer.CustomerStatus" class="text-red-500"></span>
+    </div>
+    <div class="mb-5">
+        <label asp-for="Customer.Password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+        <input disabled type="password" asp-for="Customer.Password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        <span asp-validation-for="Customer.Password" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="Customer.CustomerId" />
+    <button type="submit" class="text-white bg-red-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Delete
+    </button>
+</form>

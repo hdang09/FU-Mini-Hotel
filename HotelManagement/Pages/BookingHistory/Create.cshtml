@@ -1,0 +1,150 @@
+﻿@page
+@model HotelManagement.Pages.BookingHistory.CreateModel
+@{
+}
+
+<div class="grid grid-cols-3 gap-4">
+    <!-- Table Rooms -->
+    <div class="col-span-3">
+        <form method="post" asp-page-handler="AddBooking">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Room ID</th>
+                        <th scope="col" class="px-6 py-3">Room Number</th>
+                        <th scope="col" class="px-6 py-3">Max Capacity</th>
+                        <th scope="col" class="px-6 py-3">Room Status</th>
+                        <th scope="col" class="px-6 py-3">Price Per Day</th>
+                        <th scope="col" class="px-6 py-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Rooms)
+                    {
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                @Html.DisplayFor(modelItem => item.RoomId)
+                            </th>
+                            <td class="px-6 py-4">
+                                <a asp-page="./Details" asp-route-id="@item.RoomId">
+                                    @Html.DisplayFor(modelItem => item.RoomNumber)
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">
+                                @Html.DisplayFor(modelItem => item.RoomMaxCapacity)
+                            </td>
+                            <td class="px-6 py-4">
+                                @if (item.RoomStatus == 1)
+                                {
+                                    @Html.Raw("<span class='text-green-500'>Active</span>")
+                                }
+                                else
+                                {
+                                    @Html.Raw("<span class='text-red-500'>Inactive</span>")
+                                }
+                            </td>
+                            <td class="px-6 py-4">
+                                @Html.DisplayFor(modelItem => item.RoomPricePerDay)
+                            </td>
+                            <td class="px-6 py-4">
+                                <button type="submit" name="roomId" value="@item.RoomId" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Add
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    @* Booking Details Table *@
+    <div class="col-span-2 mt-12">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Room ID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Room Number
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Price Per Day
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BookingRooms)
+                {
+
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @Html.DisplayFor(modelItem => item.RoomId)
+                        </th>
+                        <td class="px-6 py-4">
+                            <a asp-page="./Details" asp-route-id="@item.RoomId">
+                                @Html.DisplayFor(modelItem => item.RoomNumber)
+                            </a>
+                        </td>
+                        <td class="px-6 py-4">
+                            @Html.DisplayFor(modelItem => item.RoomPricePerDay)
+                        </td>
+                        <td class="px-6 py-4">
+                            <form method="post" asp-page-handler="DeleteBooking" asp-route-roomId="@item.RoomId">
+                                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @* Booking Details Form *@
+    <div class="mt-12">
+        <form class="max-w-sm mx-auto" method="post" asp-page-handler="SaveBooking">
+            <div asp-validation-summary="ModelOnly" class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"></div>
+
+            @* <div class="mb-5">
+                <label asp-for="BookingDetailsDTO.Room.RoomNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                <input asp-for="BookingDetailsDTO.Room.RoomNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <span asp-validation-for="BookingDetailsDTO.Room.RoomNumber" class="text-red-500"></span>
+            </div> *@
+            <div class="mb-5">
+                <label asp-for="BookingDetailsDTO.StartDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                <input asp-for="BookingDetailsDTO.StartDate" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <span asp-validation-for="BookingDetailsDTO.StartDate" class="text-red-500"></span>
+            </div>
+            <div class="mb-5">
+                <label asp-for="BookingDetailsDTO.EndDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                <input asp-for="BookingDetailsDTO.EndDate" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <span asp-validation-for="BookingDetailsDTO.EndDate" class="text-red-500"></span>
+            </div>
+            @* <div class="mb-5">
+                <label asp-for="BookingDetailsDTO.ActualPrice" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
+                <input asp-for="BookingDetailsDTO.ActualPrice" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <span asp-validation-for="BookingDetailsDTO.ActualPrice" class="text-danger"></span>
+            </div> *@
+                
+            <p>Total Price: <strong>100$</strong></p>
+
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Save
+            </button>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
