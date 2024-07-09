@@ -23,7 +23,7 @@ namespace HotelManagement.Pages.Admin.Rooms
         public async Task OnGetAsync()
         {
             RoomInformation = await _context.RoomInformations
-                .Include(r => r.RoomType).ToListAsync();
+                .Include(r => r.RoomType).Where(r => r.RoomStatus == 1).ToListAsync();
         }
     }
 }

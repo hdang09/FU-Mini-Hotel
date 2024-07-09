@@ -20,8 +20,8 @@ namespace HotelManagement.Pages.Admin.Rooms
 
         public IActionResult OnGet()
         {
-        ViewData["RoomTypeId"] = new SelectList(_context.RoomTypes, "RoomTypeId", "RoomTypeName");
-            return Page();
+            ViewData["RoomTypeId"] = new SelectList(_context.RoomTypes, "RoomTypeId", "RoomTypeName");
+                return Page();
         }
 
         [BindProperty]

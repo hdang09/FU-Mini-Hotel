@@ -7,7 +7,7 @@ namespace Services
     {
         Task<BookingReservation?> GetBookingById(int id);
         Task<List<BookingHistoryDTO>> GetBookingByCusId(int id);
-        BookingReservation CreateBooking(BookingDTO booking);
+        Task<BookingReservation> CreateBooking(BookingDTO booking);
 
         List<BookingReservation?> GetBookings();
     }

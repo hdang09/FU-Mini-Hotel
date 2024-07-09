@@ -1,7 +1,8 @@
 using BusinessObjects;
-using Microsoft.EntityFrameworkCore;
+using Quartz;
 using Repository;
 using Service;
+using Service.Quartzs;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,38 @@ builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IBookingHistoryService, BookingHistoryService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+//Register SignalR
+builder.Services.AddSignalR().AddJsonProtocol(options =>
+{
+    options.PayloadSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    options.PayloadSerializerOptions.MaxDepth = 64;
+});
+builder.Services.AddTransient<BookingHub>();
+
+//Register quartz
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+    // Configure UpdateRoomStatusJob
+    var statusJobKey = new JobKey("UpdateRoomStatusJob");
+    q.AddJob<UpdateRoomStatusJob>(opts => opts.WithIdentity(statusJobKey));
+
+    var statusCronSchedule = builder.Configuration.GetSection("CronJobs:UpdateRoomStatusJob")?.Value;
+    if (string.IsNullOrWhiteSpace(statusCronSchedule))
+    {
+        throw new ArgumentException("The cron schedule for UpdateRoomStatusJob is not configured properly.");
+    }
+
+    q.AddTrigger(opts => opts
+        .ForJob(statusJobKey)
+        .WithIdentity("UpdateRoomStatusJob-trigger")
+        .WithCronSchedule(statusCronSchedule));
+});
+
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 builder.Services.AddSession(options =>
 {
@@ -47,5 +80,7 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.UseSession();
+
+app.MapHub<BookingHub>("/bookingHub");
 
 app.Run();

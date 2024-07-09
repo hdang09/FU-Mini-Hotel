@@ -43,7 +43,8 @@ namespace HotelManagement.Pages.BookingHistory
         public void OnGet()
         {
             Rooms = _roomService.GetRooms().Where(room => room.RoomStatus != 0).ToList() ?? new List<RoomInformation>();
-            LoadBookingRoomsFromSession();
+            BookingRooms = [];
+            SaveBookingRoomsToSession();
         }
 
         public IActionResult OnPostAddBooking(int roomId)
